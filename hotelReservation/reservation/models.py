@@ -1,8 +1,8 @@
 from django.db import models
-from django.contrib.auth import user
+from django.contrib.auth.models import User
 
 
-class Room(models):
+class Room(models.Model):
     PRICES = {
             '1': 5000.00,
             '2': 9000.00,
@@ -16,13 +16,13 @@ class Room(models):
     room_number = models.IntegerField()
     floor = models.SmallIntegerField()
     reservation_date = models.DateTimeField()
-    number_days = models.IntegerField(null=True, blank=False, NUM_DAYS, defaut='3')
-    client = models.ForeignKey(user, on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=7, max_places=2)
+    number_days = models.IntegerField(null=True, blank=False, choices=NUM_DAYS, default='3')
+    client = models.ForeignKey(User, on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=7, decimal_places=2)
     # we need to add a function for post processing to get an estimated price if number_day is not null
 
-    def save(self, *agrs, **kwargs):
+    def save(self, *args, **kwargs):
         # map choices from number_days and get the price
         if self.number_days is not None:
-            self.price = PRICES[self.number_days]
+            self.price = self.PRICES[self.number_days]
         super().save(*args, **kwargs)

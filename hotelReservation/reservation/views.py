@@ -1,5 +1,5 @@
 from django.views import generic as views
-from .models import Chamber
+from .models import Room
 
 # views take a request as arg and return a responce
 
@@ -10,26 +10,26 @@ from .models import Chamber
 
 class ListReservation(views.ListView):
     template_name = 'list_res.html'
-    model = Chamber
+    model = Room
     # i can override the get_context_data() for return the context data bullshit
 
 
 class DetailReservation(views.DetailView):
     template_name = 'detail_res.html'
-    model = Chamber
+    model = Room
 
 
 class CreateReservation(views.CreateView):
     template_name = 'create_res.html'
-    model = Chamber
+    model = Room
     # i can override the get_context_data() to insert the form data into the context object
 
 
 class DeleteReservation(views.DeleteView):
     template_name = 'delete_res.html'
-    model = Chamber
+    model = Room
 
 
 class UpdateReservation(views.UpdateView):
     template_name = 'update_res.html'
-    model = Chamber
+    model = Room
