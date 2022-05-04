@@ -6,8 +6,10 @@
 </head>
 <body>
 	<h1>reservation</h1>
-	{% for reservation in object_list %}
-	<p>reservation</p>
+	{% for reservation in reservations %}
+	<p>{{reservation.start_date}}</p>
+	<p>{{reservation.number_days}}</p>
+	<p>{{reservation.price}}</p>
 	{% endfor %}
 </body>
 </html>
